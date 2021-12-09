@@ -1,9 +1,25 @@
+.area {
+    display: flex;
+    width: var(--porta-largura);
+    height: var(--porta-altura);
+}
+
+
+.estrutura {
+    display: flex;
+    flex-grow: 1;
+    border-left: 5px solid brown;
+    border-top: 5px solid brown;
+    border-right: 5px solid brown;
+}
+
+
+
 .porta {
     display: flex;
     flex-direction: column;
-    width: 200px;
-    height: 310px;
     align-items: center;
+    flex-grow: 1;
     background-color: chocolate;
 
 }
