@@ -3,18 +3,24 @@ import Image from 'next/image'
 import { useState } from 'react'
 import Porta from '../components/Porta'
 import Presente from '../components/Presente'
-import criarPorta from '../funtions /portas'
+import criarPorta, { atualizarPortas } from '../funtions /portas'
 import PortaModel from '../model/porta'
 
 
-export default function Home() {
-  const [p1, setP1] = useState(new PortaModel(1))
 
-console.log(criarPorta(3, 2))
+export default function Home() {
+  const [portas, setPorta] = useState(criarPorta(3, 2))
+
+  function renderizarPortas() {
+    return portas.map(porta => {
+      return <Porta key={porta.numero} value={porta} 
+      onChange={novaPorta => setPorta(atualizarPortas(portas, novaPorta))} />
+    })
+  }
 
   return (
     <div style={{display: "flex"}}>
-      <Porta value={p1} onChange={novaPorta => setP1(novaPorta)} />
+      {renderizarPortas() }
     </div>
   )
 }
