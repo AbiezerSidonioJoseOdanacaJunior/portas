@@ -1,12 +1,23 @@
 import Link from 'next/link'
-import styles from '../styles/jogo.module.css'
-import { useState } from 'react'
-import criarPorta, { atualizarPortas } from '../funtions /portas'
-import Porta from '../components/Porta'
+import styles from '../../../styles/jogo.module.css'
+import { useEffect, useState } from 'react'
+import criarPorta, { atualizarPortas } from '../../../funtions /portas'
+import Porta from '../../../components/Porta'
+import { useRouter } from 'next/router'
 
 
-export default function() {
-    const [portas, setPorta] = useState(criarPorta(5, 5))
+export default function jogo() {
+  const router = useRouter()
+  
+  const [portas, setPorta] = useState([])
+
+  useEffect(() => {
+    const portas = +router.query.portas
+    const temPresente = +router.query.temPresente
+    setPorta(criarPorta(portas, temPresente))
+  }, [router?.query] ) 
+    
+  
 
   function renderizarPortas() {
     return portas.map(porta => {
